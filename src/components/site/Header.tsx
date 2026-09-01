@@ -61,17 +61,15 @@ export function Header() {
             <nav className="flex flex-col px-6" aria-label="Menu mobile">
               {links.map((l) => (
                 <SheetClose asChild key={l.to}>
-                  <NavLink to={l.to} end={l.end} className={({ isActive }) => cn("border-b py-3.5 text-sm uppercase tracking-[0.14em]", isActive ? "text-gold" : "text-foreground")}>
+                  <NavLink to={l.to} end={l.end} className={({ isActive }) => cn("border-b py-3 text-[13px] font-medium uppercase tracking-[0.16em]", isActive ? "text-gold" : "text-foreground/90")}>
                     {l.label}
                   </NavLink>
                 </SheetClose>
               ))}
             </nav>
-            <div className="mt-auto flex flex-col gap-3 p-6">
+            <div className="mt-auto flex flex-col gap-4 p-6">
               <Separator />
-              <Button asChild variant="outline">
-                <a href={company.phoneHref}><PhoneIcon /> {company.phone}</a>
-              </Button>
+              <a href={company.phoneHref} className="flex items-center gap-3 text-sm"><PhoneIcon className="size-4 text-gold" /> {company.phone}</a>
               <SheetClose asChild>
                 <Button asChild><Link to="/contact">Demander un devis</Link></Button>
               </SheetClose>
