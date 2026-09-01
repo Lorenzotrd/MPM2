@@ -36,7 +36,8 @@ export default function Home() {
 
       {/* Accès prestations, bandeau en biais repris de la charte */}
       <section className="border-y">
-        <div className="flex h-[clamp(200px,26vw,340px)]">
+        {/* Desktop : bandes en biais */}
+        <div className="hidden h-[clamp(200px,26vw,340px)] md:flex">
           {prestations.map((p, i) => (
             <Link
               key={p.slug}
@@ -52,6 +53,30 @@ export default function Home() {
               </div>
             </Link>
           ))}
+        </div>
+        {/* Mobile : carrés qui défilent lentement de droite à gauche */}
+        <div className="overflow-hidden md:hidden">
+          <div className="flex w-max animate-marquee motion-reduce:animate-none">
+            {[0, 1].map((copy) => (
+              <div key={copy} className="flex" aria-hidden={copy === 1 || undefined}>
+                {prestations.map((p) => (
+                  <Link
+                    key={p.slug}
+                    to={`/${p.slug}`}
+                    tabIndex={copy === 1 ? -1 : undefined}
+                    className="group relative mr-2 aspect-square w-[68vw] max-w-[300px] shrink-0 overflow-hidden"
+                  >
+                    <img src={p.images[0]?.src} alt={p.images[0]?.alt} loading="lazy" className="size-full object-cover" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
+                    <div className="absolute inset-x-0 bottom-0 flex items-center gap-3 px-5 pb-5">
+                      <PrestationIcon name={p.icon} className="size-6 shrink-0 text-gold" />
+                      <span className="text-sm font-medium uppercase tracking-[0.14em]">{p.nav}<span className="block text-[10px] font-normal tracking-[0.12em] text-white/60">{p.sub}</span></span>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
