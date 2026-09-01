@@ -120,8 +120,8 @@ export const prestations: Prestation[] = [
       { name: "Bois", pros: "Chaleureux, naturel, se marie avec une terrasse ou un bardage bois.", cons: "Demande un entretien régulier (lasure, huile) pour garder sa teinte." },
     ],
     images: [
-      { src: "/photos/cloture-aluminium.jpg", alt: "Clôture aluminium à lames horizontales sur muret, Landes" },
       { src: "/photos/bardage-cloture-bois.jpg", alt: "Clôture bois pleine hauteur avec bardage assorti" },
+      { src: "/photos/cloture-aluminium.jpg", alt: "Clôture aluminium à lames horizontales sur muret, Landes" },
       { src: "/photos/terrasse-pergola-bois.jpg", alt: "Clôture et haie avec terrasse bois" },
     ],
     faq: [

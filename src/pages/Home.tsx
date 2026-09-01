@@ -11,56 +11,49 @@ import { CtaBand } from "@/components/site/CtaBand"
 export default function Home() {
   return (
     <>
-      {/* Hero */}
-      <section className="relative overflow-hidden">
-        <Container className="pt-20 pb-14 text-center sm:pt-28">
-          <Eyebrow center>{company.tagline}</Eyebrow>
-          <h1 className="mx-auto mt-6 max-w-3xl text-4xl leading-[1.08] font-normal tracking-tight sm:text-5xl lg:text-6xl">
+      {/* Hero plein écran sur photo */}
+      <section className="relative flex min-h-[88vh] items-end overflow-hidden">
+        <img src="/photos/terrasse-piscine.jpg" alt="" className="absolute inset-0 size-full object-cover" fetchPriority="high" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-black/20" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/20 to-transparent" />
+        <Container className="relative pb-20 pt-32 sm:pb-28">
+          <Eyebrow>{company.tagline}</Eyebrow>
+          <h1 className="mt-6 max-w-3xl text-4xl leading-[1.05] font-normal tracking-tight sm:text-6xl lg:text-7xl">
             Votre extérieur, pensé avec vous, <span className="font-light text-gold">réalisé par nous</span>
           </h1>
-          <p className="mx-auto mt-6 max-w-2xl text-base text-muted-foreground sm:text-lg">
-            Portails, clôtures, terrasses, pergolas, bardages et menuiseries à {company.zone}. Nous étudions chaque projet avec vous, du choix des matériaux jusqu'aux finitions.
+          <p className="mt-6 max-w-xl text-base text-white/80 sm:text-lg">
+            Portails, clôtures, terrasses, pergolas, bardages et menuiseries à {company.zone}. Chaque projet est étudié avec vous, du choix des matériaux jusqu'aux finitions.
           </p>
-          <div className="mt-8 flex flex-wrap justify-center gap-3">
+          <div className="mt-8 flex flex-wrap gap-3">
             <Button asChild size="lg"><Link to="/contact">Parlons de votre projet</Link></Button>
-            <Button asChild size="lg" variant="outline"><a href={company.phoneHref}><PhoneIcon /> {company.phone}</a></Button>
+            <Button asChild size="lg" variant="outline" className="border-white/40 bg-black/30 backdrop-blur hover:bg-black/50"><a href={company.phoneHref}><PhoneIcon /> {company.phone}</a></Button>
           </div>
+          <ul className="mt-12 hidden gap-x-6 gap-y-2 text-[11px] font-medium uppercase tracking-[0.2em] text-white/70 md:flex">
+            {prestations.map((p) => <li key={p.slug} className="flex items-center gap-6 [&:not(:first-child)]:before:h-1 [&:not(:first-child)]:before:w-1 [&:not(:first-child)]:before:bg-gold [&:not(:first-child)]:before:content-['']">{p.nav}</li>)}
+          </ul>
         </Container>
+      </section>
 
-        {/* Bandeau photo en biais, repris de la charte */}
-        <div className="hidden h-[clamp(240px,32vw,420px)] md:flex">
+      {/* Accès prestations, bandeau en biais repris de la charte */}
+      <section className="border-y">
+        <div className="flex h-[clamp(200px,26vw,340px)]">
           {prestations.map((p, i) => (
             <Link
               key={p.slug}
               to={`/${p.slug}`}
-              className="group relative flex-1 -mr-[5%] last:mr-0"
+              className="group relative flex-1 -mr-[5%] overflow-hidden last:mr-0"
               style={{ clipPath: i === prestations.length - 1 ? "none" : "polygon(0 0,100% 0,84% 100%,0 100%)" }}
             >
-              <Photo src={p.images[0]?.src} alt={p.images[0]?.alt} className="size-full" />
-              <span className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 to-transparent px-6 pt-10 pb-5 text-lg font-medium tracking-wide group-hover:text-gold">{p.nav}</span>
+              <img src={p.images[0]?.src} alt={p.images[0]?.alt} loading="lazy" className="size-full object-cover transition-transform duration-500 group-hover:scale-105" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
+              <div className="absolute inset-x-0 bottom-0 flex items-center gap-3 px-5 pb-5 pr-[16%]">
+                <PrestationIcon name={p.icon} className="size-6 shrink-0 text-gold" />
+                <span className="text-sm font-medium uppercase tracking-[0.14em] group-hover:text-gold">{p.nav}<span className="block text-[10px] font-normal tracking-[0.12em] text-white/60">{p.sub}</span></span>
+              </div>
             </Link>
           ))}
         </div>
       </section>
-
-      {/* Accès rapides prestations */}
-      <Container>
-        <div className="grid grid-cols-2 border sm:grid-cols-3 lg:grid-cols-6">
-          {prestations.map((p) => (
-            <Link
-              key={p.slug}
-              to={`/${p.slug}`}
-              className="flex flex-col gap-3 border-b border-r p-5 transition-colors hover:bg-card sm:[&:nth-child(3n)]:border-r-0 lg:border-b-0 lg:[&:nth-child(3n)]:border-r lg:last:border-r-0 [&:nth-child(2n)]:border-r-0 sm:[&:nth-child(2n)]:border-r"
-            >
-              <PrestationIcon name={p.icon} className="size-8 text-gold" />
-              <span className="text-[11px] font-medium uppercase leading-snug tracking-[0.14em]">
-                {p.nav}
-                <span className="block font-normal text-muted-foreground">{p.sub}</span>
-              </span>
-            </Link>
-          ))}
-        </div>
-      </Container>
 
       {/* Accompagnement */}
       <Section>
