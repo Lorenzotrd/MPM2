@@ -81,6 +81,9 @@ export default function PrestationPage() {
             <Photo src={rest[0]?.src} alt={rest[0]?.alt} sizes="(min-width: 1024px) 45vw, 100vw" className="col-span-2 aspect-[16/10]" />
             <Photo src={rest[1]?.src} alt={rest[1]?.alt} sizes="(min-width: 1024px) 22vw, 50vw" className="aspect-[4/3]" />
             <Photo src={main?.src} alt={main?.alt} sizes="(min-width: 1024px) 22vw, 50vw" className="aspect-[4/3]" />
+            {rest.slice(2).map((img, i) => (
+              <Photo key={`${img.src ?? "vide"}-${i}`} src={img.src} alt={img.alt} sizes="(min-width: 1024px) 22vw, 50vw" className="aspect-[4/3]" />
+            ))}
           </div>
         </Container>
       </Section>
