@@ -105,6 +105,11 @@ export const photos = {
   clotureBoisClaireVoie: "cloture-bois-claire-voie",
   clotureGrillageRigide: "cloture-grillage-rigide",
   abriBoisBardage: "abri-bois-bardage",
+  clotureBoisPoteauxAlu: "cloture-bois-poteaux-alu",
+  dressingParquetChene: "dressing-parquet-chene",
+  porteAluminiumAtelier: "porte-aluminium-atelier",
+  fenetreAluminiumVoletRoulant: "fenetre-aluminium-volet-roulant",
+  porteFenetreBoisBlanche: "porte-fenetre-bois-blanche",
 }
 
 export const prestations: Prestation[] = [
@@ -166,11 +171,11 @@ export const prestations: Prestation[] = [
       { name: "Grillage rigide", pros: "Le plus économique sur de grandes longueurs, pose rapide, discret, occultation possible avec des lames.", cons: "Peu occultant sans lames ou brise-vue, rendu plus technique que décoratif." },
     ],
     images: [
+      { src: photos.clotureBoisPoteauxAlu, alt: "Clôture en lames bois horizontales sur poteaux aluminium anthracite" },
       { src: photos.clotureAluminium, alt: "Clôture aluminium anthracite à lames horizontales sur muret, Landes" },
       { src: photos.clotureBoisClaireVoie, alt: "Clôture bois à claire-voie sur muret et en limite de jardin" },
       { src: photos.portillonClotureAluminium, alt: "Clôture occultante anthracite avec portillon aluminium" },
       { src: photos.clotureGrillageRigide, alt: "Clôture en grillage rigide sur soubassement béton" },
-      { src: photos.bardageClotureBois, alt: "Clôture bois pleine hauteur assortie au bardage" },
     ],
     faq: [
       { q: "Quelle hauteur maximale pour une clôture ?", a: "Elle dépend du plan local d'urbanisme de votre commune. En général 1,80 m à 2 m. Nous le vérifions pour vous." },
@@ -206,9 +211,11 @@ export const prestations: Prestation[] = [
       { name: "Bois", pros: "Noble et isolant, idéal en rénovation de caractère.", cons: "Entretien régulier à prévoir." },
     ],
     images: [
+      { src: photos.dressingParquetChene, alt: "Dressing sur mesure à portes toute hauteur et parquet chêne" },
+      { src: photos.porteFenetreBoisBlanche, alt: "Porte-fenêtre bois blanche à petits carreaux avec imposte, façade en pierre" },
+      { src: photos.fenetreAluminiumVoletRoulant, alt: "Fenêtre aluminium anthracite avec volet roulant intégré" },
+      { src: photos.porteAluminiumAtelier, alt: "Porte d'entrée aluminium noire, vitrage style atelier" },
       { src: photos.parquetInterieur, alt: "Pose de parquet dans une pièce de vie" },
-      { src: photos.abriBoisBardage, alt: "Abri bois sur mesure, portes à ferrures noires" },
-      { alt: "Fenêtres et baies aluminium" },
     ],
     faq: [
       { q: "Faites-vous uniquement de la pose ?", a: "Non. Nous concevons et fabriquons aussi les aménagements sur mesure (dressings, rangements, habillages en MDF ou stratifié)." },
@@ -311,7 +318,9 @@ export const prestations: Prestation[] = [
 
 export const realisations: Img[] = [
   { src: photos.terrassePiscine, alt: "Terrasse bois autour d'une piscine" },
+  { src: photos.clotureBoisPoteauxAlu, alt: "Clôture bois sur poteaux aluminium" },
   { src: photos.portailAcierVert, alt: "Portail battant acier vert" },
+  { src: photos.dressingParquetChene, alt: "Dressing sur mesure et parquet chêne" },
   { src: photos.pergolaBioclimatique, alt: "Pergola bioclimatique aluminium" },
   { src: photos.portillonClotureAluminium, alt: "Portillon et clôture aluminium anthracite" },
   { src: photos.bardageClotureBois, alt: "Bardage et clôture bois" },
