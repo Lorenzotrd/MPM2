@@ -4,10 +4,16 @@ import { Separator } from "@/components/ui/separator"
 import { engagements, values } from "@/data/site"
 import { Container, Eyebrow, Heading, Section } from "@/components/site/Section"
 import { CtaBand } from "@/components/site/CtaBand"
+import { Seo } from "@/components/site/Seo"
 
 export default function Engagements() {
   return (
     <>
+      <Seo
+        title="Nos engagements : expertise offerte, devis sous 48 h, suivi à 1 an"
+        description="Ce que nous nous engageons à faire pour chaque client : expertise gratuite à domicile, devis détaillé sous 48 h, chantier propre et finitions soignées, bilan un an après les travaux."
+        path="/engagements"
+      />
       <Section className="border-b">
         <Container>
           <Eyebrow>Nos engagements</Eyebrow>

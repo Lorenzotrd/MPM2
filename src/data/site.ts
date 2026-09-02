@@ -3,13 +3,34 @@ export const company = {
   short: "MPM",
   tagline: "Conception d'aménagement extérieur sur mesure",
   address: ["19 avenue de Casteroun", "40230 Saint-Vincent-de-Tyrosse"],
+  streetAddress: "19 avenue de Casteroun",
+  postalCode: "40230",
+  city: "Saint-Vincent-de-Tyrosse",
   phone: "06 40 64 87 00",
   phoneHref: "tel:+33640648700",
+  phoneIntl: "+33640648700",
   email: "mpmconcept40@gmail.com",
-  instagram: "https://www.instagram.com/",
-  instagramLabel: "Métal Portail & Menuiserie",
   zone: "Saint-Vincent-de-Tyrosse et tout le sud des Landes",
+  /* URL publique du site. À remplacer par le nom de domaine définitif dès qu'il est acheté
+     (le sitemap et les balises canonical / Open Graph en dépendent). */
+  siteUrl: "https://mpm-2.vercel.app",
 }
+
+/* Communes principales de la zone d'intervention. Servent au référencement local
+   (texte du pied de page, descriptions, données structurées). */
+export const communes = [
+  "Saint-Vincent-de-Tyrosse",
+  "Capbreton",
+  "Hossegor",
+  "Seignosse",
+  "Soustons",
+  "Saint-Geours-de-Maremne",
+  "Bénesse-Maremne",
+  "Labenne",
+  "Angresse",
+  "Dax",
+  "Bayonne",
+]
 
 export const mailto = (subject: string, body?: string) =>
   `mailto:${company.email}?subject=${encodeURIComponent(subject)}${body ? `&body=${encodeURIComponent(body)}` : ""}`
@@ -49,7 +70,10 @@ export const engagements = [
 
 export const values = ["Sérieux", "Professionnel", "À l'écoute", "Disponible", "Proche de ses clients", "Sur mesure"]
 
-export type Img = { src: string; alt: string }
+/* Photos : `src` est le chemin de base sans extension ni taille.
+   Les fichiers /photos/<src>-640.webp, -1024.webp et -1600.webp doivent exister.
+   Un `src` absent affiche un fond noir « à remplir » cohérent avec la charte. */
+export type Img = { src?: string; alt: string }
 export type Material = { name: string; pros: string; cons: string }
 export type Prestation = {
   slug: string
@@ -57,6 +81,8 @@ export type Prestation = {
   title: string
   headline: string
   intro: string
+  seoTitle: string
+  seoDescription: string
   icon: "cloture" | "portail" | "terrasse" | "pergola" | "bardage" | "menuiserie"
   sub: string
   sections: { title: string; text?: string; items: string[] }[]
@@ -66,6 +92,16 @@ export type Prestation = {
   faq: { q: string; a: string }[]
 }
 
+export const photos = {
+  terrassePiscine: "terrasse-piscine",
+  terrassePiscine2: "terrasse-piscine-2",
+  terrassePergolaBois: "terrasse-pergola-bois",
+  bardageClotureBois: "bardage-cloture-bois",
+  clotureAluminium: "cloture-aluminium",
+  pergolaBioclimatique: "pergola-bioclimatique",
+  parquetInterieur: "parquet-interieur",
+}
+
 export const prestations: Prestation[] = [
   {
     slug: "portails",
@@ -73,6 +109,8 @@ export const prestations: Prestation[] = [
     title: "Portails",
     headline: "Le portail qui correspond à votre entrée",
     intro: "Battant ou coulissant, en aluminium, en PVC ou en acier, avec ou sans motorisation : nous vous aidons à choisir le portail adapté à votre habitation, à votre budget et à vos attentes.",
+    seoTitle: "Portail aluminium, PVC ou acier sur mesure à Saint-Vincent-de-Tyrosse",
+    seoDescription: "Pose de portails battants ou coulissants, motorisés ou non, en aluminium, PVC ou acier thermolaqué. Expertise gratuite, devis sous 48 h, sud des Landes : Tyrosse, Capbreton, Hossegor, Soustons.",
     icon: "portail",
     sub: "Alu & acier",
     sections: [
@@ -89,10 +127,11 @@ export const prestations: Prestation[] = [
       { name: "Acier thermolaqué", pros: "Très robuste, rendu haut de gamme, laquage protecteur durable.", cons: "Plus lourd, motorisation à dimensionner en conséquence." },
       { name: "Acier non thermolaqué", pros: "Proposé selon les projets, pour un rendu industriel ou une mise en peinture sur place.", cons: "Demande un traitement anticorrosion et un entretien régulier." },
     ],
+    /* Aucune photo de portail pour l'instant : fonds noirs en attendant. */
     images: [
-      { src: "/photos/cloture-aluminium.jpg", alt: "Clôture et portail aluminium anthracite sur muret" },
-      { src: "/photos/pergola-bioclimatique.jpg", alt: "Aluminium anthracite thermolaqué" },
-      { src: "/photos/bardage-cloture-bois.jpg", alt: "Portillon bois assorti à la clôture" },
+      { alt: "Portail aluminium sur mesure" },
+      { alt: "Portail coulissant motorisé" },
+      { alt: "Portillon assorti au portail" },
     ],
     faq: [
       { q: "Faut-il une autorisation pour poser un portail ?", a: "Dans la plupart des communes, une déclaration préalable de travaux suffit. Nous vérifions les règles d'urbanisme avec vous lors de l'expertise gratuite." },
@@ -105,6 +144,8 @@ export const prestations: Prestation[] = [
     title: "Clôtures",
     headline: "Sécuriser, délimiter et embellir votre extérieur",
     intro: "Une clôture se choisit selon les règles d'urbanisme de votre commune, les autorisations éventuelles, le style recherché, le niveau d'occultation souhaité et votre budget. Nous vérifions tout cela avec vous avant de proposer une solution.",
+    seoTitle: "Clôture aluminium, PVC ou bois sur mesure dans les Landes",
+    seoDescription: "Pose de clôtures aluminium, PVC et bois à Saint-Vincent-de-Tyrosse et dans le sud des Landes. Occultation, hauteur, règles d'urbanisme : on étudie tout avec vous. Expertise gratuite, devis sous 48 h.",
     icon: "cloture",
     sub: "Sur mesure",
     sections: [
@@ -120,9 +161,9 @@ export const prestations: Prestation[] = [
       { name: "Bois", pros: "Chaleureux, naturel, se marie avec une terrasse ou un bardage bois.", cons: "Demande un entretien régulier (lasure, huile) pour garder sa teinte." },
     ],
     images: [
-      { src: "/photos/bardage-cloture-bois.jpg", alt: "Clôture bois pleine hauteur avec bardage assorti" },
-      { src: "/photos/cloture-aluminium.jpg", alt: "Clôture aluminium à lames horizontales sur muret, Landes" },
-      { src: "/photos/terrasse-pergola-bois.jpg", alt: "Clôture et haie avec terrasse bois" },
+      { src: photos.clotureAluminium, alt: "Clôture aluminium anthracite à lames horizontales sur muret, Landes" },
+      { src: photos.bardageClotureBois, alt: "Clôture bois pleine hauteur assortie au bardage" },
+      { alt: "Clôture PVC occultante" },
     ],
     faq: [
       { q: "Quelle hauteur maximale pour une clôture ?", a: "Elle dépend du plan local d'urbanisme de votre commune. En général 1,80 m à 2 m. Nous le vérifions pour vous." },
@@ -135,6 +176,8 @@ export const prestations: Prestation[] = [
     title: "Menuiseries & aménagement intérieur",
     headline: "Des menuiseries dehors, du sur mesure dedans",
     intro: "Fenêtres, portes, volets : nous posons des menuiseries en aluminium, PVC ou bois. Et parce que le savoir-faire ne s'arrête pas au seuil, nous réalisons aussi vos parquets, dressings et aménagements intérieurs sur mesure.",
+    seoTitle: "Menuiseries alu, PVC, bois et aménagement intérieur sur mesure",
+    seoDescription: "Fenêtres, portes, volets roulants et battants en aluminium, PVC ou bois. Parquets, dressings et aménagements sur mesure. Menuisier à Saint-Vincent-de-Tyrosse, sud des Landes.",
     icon: "menuiserie",
     sub: "Alu, bois & PVC",
     sections: [
@@ -156,9 +199,9 @@ export const prestations: Prestation[] = [
       { name: "Bois", pros: "Noble et isolant, idéal en rénovation de caractère.", cons: "Entretien régulier à prévoir." },
     ],
     images: [
-      { src: "/photos/parquet-interieur.jpg", alt: "Pose de parquet dans une pièce de vie" },
-      { src: "/photos/terrasse-pergola-bois.jpg", alt: "Baies coulissantes aluminium noir" },
-      { src: "/photos/terrasse-piscine.jpg", alt: "Volets roulants et menuiseries anthracite" },
+      { src: photos.parquetInterieur, alt: "Pose de parquet dans une pièce de vie" },
+      { alt: "Fenêtres et baies aluminium" },
+      { alt: "Dressing sur mesure" },
     ],
     faq: [
       { q: "Faites-vous uniquement de la pose ?", a: "Non. Nous concevons et fabriquons aussi les aménagements sur mesure (dressings, rangements, habillages en MDF ou stratifié)." },
@@ -170,6 +213,8 @@ export const prestations: Prestation[] = [
     title: "Terrasses",
     headline: "Une terrasse bois pour vivre dehors",
     intro: "Nous réalisons des terrasses en bois naturel ou en bois composite pour aménager et valoriser votre extérieur. Le bon choix dépend de l'esthétique recherchée, de l'entretien accepté, de la résistance attendue et du budget.",
+    seoTitle: "Terrasse bois et composite sur mesure à Saint-Vincent-de-Tyrosse",
+    seoDescription: "Création de terrasses en bois naturel ou composite, plage de piscine, terrasse sur plots. Étude du terrain, structure, finitions. Sud des Landes : Tyrosse, Capbreton, Hossegor, Seignosse.",
     icon: "terrasse",
     sub: "Bois",
     sections: [
@@ -184,9 +229,10 @@ export const prestations: Prestation[] = [
       { name: "Bois composite", pros: "Ne grise pas, ne se fend pas, sans écharde, entretien réduit à un nettoyage.", cons: "Plus cher à l'achat, chauffe davantage au soleil selon les teintes." },
     ],
     images: [
-      { src: "/photos/terrasse-piscine.jpg", alt: "Terrasse bois autour d'une piscine, arbre intégré" },
-      { src: "/photos/terrasse-pergola-bois.jpg", alt: "Terrasse bois sous pergola bois" },
-      { src: "/photos/terrasse-piscine-2.jpg", alt: "Terrasse bois exotique avec margelles piscine" },
+      { src: photos.terrassePiscine, alt: "Terrasse bois autour d'une piscine, arbre intégré" },
+      { src: photos.terrassePiscine2, alt: "Terrasse bois exotique avec margelles piscine" },
+      { src: photos.terrassePergolaBois, alt: "Terrasse bois devant la maison, sous pergola bois" },
+      { src: photos.bardageClotureBois, alt: "Terrasse bois sur deux niveaux avec spa" },
     ],
     faq: [
       { q: "Quelle essence de bois choisir ?", a: "Pin traité classe 4 pour le budget, bois exotique (ipé, cumaru) pour la durabilité. Nous vous montrons des échantillons." },
@@ -198,6 +244,8 @@ export const prestations: Prestation[] = [
     title: "Pergolas",
     headline: "Profiter de votre extérieur plus longtemps",
     intro: "En bois pour un rendu naturel, ou bioclimatique en aluminium pour régler vous-même l'ensoleillement et la ventilation grâce à ses lames orientables. Nous la dimensionnons à votre terrasse et à votre façade.",
+    seoTitle: "Pergola bioclimatique aluminium ou pergola bois sur mesure, Landes",
+    seoDescription: "Pose de pergolas bioclimatiques à lames orientables et de pergolas bois, adossées ou autoportées. Options LED, stores, motorisation. Saint-Vincent-de-Tyrosse et sud des Landes.",
     icon: "pergola",
     sub: "Sur mesure",
     sections: [
@@ -213,9 +261,9 @@ export const prestations: Prestation[] = [
       { name: "Bioclimatique aluminium", pros: "Lames orientables pour doser ombre et lumière, étanche lames fermées, aucun entretien.", cons: "Investissement plus important." },
     ],
     images: [
-      { src: "/photos/pergola-bioclimatique.jpg", alt: "Pergola bioclimatique aluminium à lames orientables" },
-      { src: "/photos/terrasse-pergola-bois.jpg", alt: "Pergola bois adossée sur terrasse" },
-      { src: "/photos/terrasse-piscine.jpg", alt: "Auvent bois sur terrasse piscine" },
+      { src: photos.pergolaBioclimatique, alt: "Pergola bioclimatique aluminium à lames orientables" },
+      { src: photos.terrassePergolaBois, alt: "Pergola bois adossée à la façade, sur terrasse bois" },
+      { alt: "Pergola autoportée" },
     ],
     faq: [
       { q: "Une pergola bioclimatique protège-t-elle de la pluie ?", a: "Oui, lames fermées elle est étanche et l'eau est évacuée par les poteaux." },
@@ -227,6 +275,8 @@ export const prestations: Prestation[] = [
     title: "Bardages",
     headline: "Habiller, protéger et valoriser vos façades",
     intro: "Le bardage change le visage d'une maison tout en protégeant ses murs. Nous proposons différents types de bardages selon le style recherché, l'entretien souhaité et le budget, en cohérence avec vos menuiseries et votre clôture.",
+    seoTitle: "Bardage bois et composite de façade à Saint-Vincent-de-Tyrosse",
+    seoDescription: "Pose de bardage bois naturel, composite ou rapporté isolant sur façade. Claire-voie ou jointif, vertical ou horizontal. Artisan dans le sud des Landes, expertise gratuite et devis sous 48 h.",
     icon: "bardage",
     sub: "Bois",
     sections: [
@@ -242,9 +292,9 @@ export const prestations: Prestation[] = [
       { name: "Bardage rapporté isolant", pros: "Permet d'isoler par l'extérieur en même temps que l'on rénove la façade.", cons: "Étude technique et déclaration préalable à prévoir." },
     ],
     images: [
-      { src: "/photos/bardage-cloture-bois.jpg", alt: "Bardage bois vertical à claire-voie sur façade et clôture" },
-      { src: "/photos/terrasse-piscine-2.jpg", alt: "Bardage bois sur façade, détail" },
-      { src: "/photos/terrasse-pergola-bois.jpg", alt: "Poteaux et charpente bois apparents" },
+      { src: photos.bardageClotureBois, alt: "Bardage bois vertical sur façade, clôture bois assortie" },
+      { alt: "Bardage composite" },
+      { alt: "Détail de finition autour d'une ouverture" },
     ],
     faq: [
       { q: "Le bardage bois demande-t-il beaucoup d'entretien ?", a: "Non traité, il grise uniformément et reste protégé. Pour garder la teinte d'origine, un saturateur tous les 2 à 3 ans suffit." },
@@ -253,11 +303,10 @@ export const prestations: Prestation[] = [
 ]
 
 export const realisations: Img[] = [
-  { src: "/photos/terrasse-piscine.jpg", alt: "Terrasse bois autour d'une piscine" },
-  { src: "/photos/pergola-bioclimatique.jpg", alt: "Pergola bioclimatique aluminium" },
-  { src: "/photos/bardage-cloture-bois.jpg", alt: "Bardage et clôture bois" },
-  { src: "/photos/terrasse-pergola-bois.jpg", alt: "Terrasse bois et pergola bois" },
-  { src: "/photos/cloture-aluminium.jpg", alt: "Clôture aluminium sur muret" },
-  { src: "/photos/parquet-interieur.jpg", alt: "Parquet dans une pièce de vie" },
+  { src: photos.terrassePiscine, alt: "Terrasse bois autour d'une piscine" },
+  { src: photos.pergolaBioclimatique, alt: "Pergola bioclimatique aluminium" },
+  { src: photos.bardageClotureBois, alt: "Bardage et clôture bois" },
+  { src: photos.terrassePergolaBois, alt: "Terrasse bois et pergola bois" },
+  { src: photos.clotureAluminium, alt: "Clôture aluminium sur muret" },
+  { src: photos.parquetInterieur, alt: "Parquet dans une pièce de vie" },
 ]
-

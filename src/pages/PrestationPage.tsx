@@ -1,22 +1,55 @@
-import { Link, useParams, Navigate } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import { CheckIcon, MailIcon } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
-import { catalogueMail, prestations } from "@/data/site"
-import { Container, Eyebrow, Photo, Section } from "@/components/site/Section"
+import { catalogueMail, company, prestations } from "@/data/site"
+import { Container, Eyebrow, Photo, Picture, Section } from "@/components/site/Section"
+import { PrestationIcon } from "@/components/site/Icons"
+import { Seo } from "@/components/site/Seo"
+import NotFound from "./NotFound"
 
 export default function PrestationPage() {
   const { slug } = useParams()
   const p = prestations.find((x) => x.slug === slug)
-  if (!p) return <Navigate to="/" replace />
+  if (!p) return <NotFound />
   const others = prestations.filter((x) => x.slug !== p.slug)
   const [main, ...rest] = p.images
+  const ogImage = main?.src ? `/photos/${main.src}-1024.webp` : undefined
 
   return (
     <>
-      {/* En-tête plein écran sur photo */}
-      <section className="relative flex min-h-[70vh] items-end overflow-hidden">
-        <img src={main?.src} alt="" className="absolute inset-0 size-full object-cover" fetchPriority="high" />
+      <Seo title={p.seoTitle} description={p.seoDescription} path={`/${p.slug}`} image={ogImage} />
+      <script type="application/ld+json">
+        {JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Service",
+          name: p.title,
+          serviceType: p.title,
+          description: p.seoDescription,
+          areaServed: company.zone,
+          provider: { "@type": "LocalBusiness", name: company.name, telephone: company.phoneIntl, url: company.siteUrl },
+          url: `${company.siteUrl}/${p.slug}`,
+        })}
+      </script>
+      {p.faq.length > 0 && (
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: p.faq.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
+          })}
+        </script>
+      )}
+
+      {/* En-tête plein écran : photo si elle existe, sinon fond noir avec l'icône du métier */}
+      <section className="relative flex min-h-[60vh] items-end overflow-hidden sm:min-h-[70vh]">
+        {main?.src ? (
+          <Picture src={main.src} alt="" sizes="100vw" loading="eager" decoding="sync" fetchPriority="high" className="absolute inset-0 size-full object-cover" />
+        ) : (
+          <div className="absolute inset-0 bg-[linear-gradient(160deg,#1c1813,#050505)]" aria-hidden="true">
+            <PrestationIcon name={p.icon} className="absolute right-[-4%] top-1/2 size-[70vh] -translate-y-1/2 text-gold/10 sm:right-[6%]" />
+          </div>
+        )}
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/55 to-black/10" />
         <Container className="relative pb-16 pt-32 sm:pb-20">
           <Eyebrow>{p.title}</Eyebrow>
@@ -45,9 +78,9 @@ export default function PrestationPage() {
             ))}
           </div>
           <div className="grid grid-cols-2 gap-3 self-start">
-            {rest[0] && <Photo src={rest[0].src} alt={rest[0].alt} className="col-span-2 aspect-[16/10]" />}
-            {rest[1] && <Photo src={rest[1].src} alt={rest[1].alt} className="aspect-[4/3]" />}
-            {main && <Photo src={main.src} alt={main.alt} className="aspect-[4/3]" />}
+            <Photo src={rest[0]?.src} alt={rest[0]?.alt} sizes="(min-width: 1024px) 45vw, 100vw" className="col-span-2 aspect-[16/10]" />
+            <Photo src={rest[1]?.src} alt={rest[1]?.alt} sizes="(min-width: 1024px) 22vw, 50vw" className="aspect-[4/3]" />
+            <Photo src={main?.src} alt={main?.alt} sizes="(min-width: 1024px) 22vw, 50vw" className="aspect-[4/3]" />
           </div>
         </Container>
       </Section>
@@ -110,14 +143,14 @@ export default function PrestationPage() {
       </section>
 
       {/* Voir aussi */}
-      <section className="border-t">
-        <Container className="flex flex-wrap items-center gap-x-8 gap-y-3 py-8 text-[11px] font-medium uppercase tracking-[0.16em]">
-          <span className="text-muted-foreground">Voir aussi</span>
+      <nav className="border-t" aria-label="Autres prestations">
+        <Container className="flex flex-wrap items-center gap-x-6 gap-y-1 py-6 text-[11px] font-medium uppercase tracking-[0.16em]">
+          <span className="py-2 text-muted-foreground">Voir aussi</span>
           {others.map((o) => (
-            <Link key={o.slug} to={`/${o.slug}`} className="text-foreground/80 hover:text-gold">{o.nav}</Link>
+            <Link key={o.slug} to={`/${o.slug}`} className="inline-flex min-h-11 items-center px-1 text-foreground/80 hover:text-gold">{o.nav}</Link>
           ))}
         </Container>
-      </section>
+      </nav>
     </>
   )
 }
