@@ -100,6 +100,11 @@ export const photos = {
   clotureAluminium: "cloture-aluminium",
   pergolaBioclimatique: "pergola-bioclimatique",
   parquetInterieur: "parquet-interieur",
+  portailAcierVert: "portail-acier-vert",
+  portillonClotureAluminium: "portillon-cloture-aluminium",
+  clotureBoisClaireVoie: "cloture-bois-claire-voie",
+  clotureGrillageRigide: "cloture-grillage-rigide",
+  abriBoisBardage: "abri-bois-bardage",
 }
 
 export const prestations: Prestation[] = [
@@ -127,11 +132,10 @@ export const prestations: Prestation[] = [
       { name: "Acier thermolaqué", pros: "Très robuste, rendu haut de gamme, laquage protecteur durable.", cons: "Plus lourd, motorisation à dimensionner en conséquence." },
       { name: "Acier non thermolaqué", pros: "Proposé selon les projets, pour un rendu industriel ou une mise en peinture sur place.", cons: "Demande un traitement anticorrosion et un entretien régulier." },
     ],
-    /* Aucune photo de portail pour l'instant : fonds noirs en attendant. */
     images: [
-      { alt: "Portail aluminium sur mesure" },
+      { src: photos.portailAcierVert, alt: "Portail battant deux vantaux en acier vert, piliers maçonnés" },
+      { src: photos.portillonClotureAluminium, alt: "Portillon aluminium anthracite assorti à la clôture" },
       { alt: "Portail coulissant motorisé" },
-      { alt: "Portillon assorti au portail" },
     ],
     faq: [
       { q: "Faut-il une autorisation pour poser un portail ?", a: "Dans la plupart des communes, une déclaration préalable de travaux suffit. Nous vérifions les règles d'urbanisme avec vous lors de l'expertise gratuite." },
@@ -159,11 +163,14 @@ export const prestations: Prestation[] = [
       { name: "Aluminium", pros: "Zéro entretien, très grande durée de vie, design contemporain, s'accorde avec un portail alu.", cons: "Le plus cher des trois à l'achat." },
       { name: "PVC", pros: "Prix contenu, facile à entretenir, bonne occultation.", cons: "Peut jaunir ou se fragiliser avec les années en plein soleil." },
       { name: "Bois", pros: "Chaleureux, naturel, se marie avec une terrasse ou un bardage bois.", cons: "Demande un entretien régulier (lasure, huile) pour garder sa teinte." },
+      { name: "Grillage rigide", pros: "Le plus économique sur de grandes longueurs, pose rapide, discret, occultation possible avec des lames.", cons: "Peu occultant sans lames ou brise-vue, rendu plus technique que décoratif." },
     ],
     images: [
       { src: photos.clotureAluminium, alt: "Clôture aluminium anthracite à lames horizontales sur muret, Landes" },
+      { src: photos.clotureBoisClaireVoie, alt: "Clôture bois à claire-voie sur muret et en limite de jardin" },
+      { src: photos.portillonClotureAluminium, alt: "Clôture occultante anthracite avec portillon aluminium" },
+      { src: photos.clotureGrillageRigide, alt: "Clôture en grillage rigide sur soubassement béton" },
       { src: photos.bardageClotureBois, alt: "Clôture bois pleine hauteur assortie au bardage" },
-      { alt: "Clôture PVC occultante" },
     ],
     faq: [
       { q: "Quelle hauteur maximale pour une clôture ?", a: "Elle dépend du plan local d'urbanisme de votre commune. En général 1,80 m à 2 m. Nous le vérifions pour vous." },
@@ -200,8 +207,8 @@ export const prestations: Prestation[] = [
     ],
     images: [
       { src: photos.parquetInterieur, alt: "Pose de parquet dans une pièce de vie" },
+      { src: photos.abriBoisBardage, alt: "Abri bois sur mesure, portes à ferrures noires" },
       { alt: "Fenêtres et baies aluminium" },
-      { alt: "Dressing sur mesure" },
     ],
     faq: [
       { q: "Faites-vous uniquement de la pose ?", a: "Non. Nous concevons et fabriquons aussi les aménagements sur mesure (dressings, rangements, habillages en MDF ou stratifié)." },
@@ -293,8 +300,8 @@ export const prestations: Prestation[] = [
     ],
     images: [
       { src: photos.bardageClotureBois, alt: "Bardage bois vertical sur façade, clôture bois assortie" },
-      { alt: "Bardage composite" },
-      { alt: "Détail de finition autour d'une ouverture" },
+      { src: photos.abriBoisBardage, alt: "Bardage bois vertical sur abri, portes intégrées et ferrures noires" },
+      { src: photos.clotureBoisClaireVoie, alt: "Habillage bois à claire-voie" },
     ],
     faq: [
       { q: "Le bardage bois demande-t-il beaucoup d'entretien ?", a: "Non traité, il grise uniformément et reste protégé. Pour garder la teinte d'origine, un saturateur tous les 2 à 3 ans suffit." },
@@ -304,9 +311,11 @@ export const prestations: Prestation[] = [
 
 export const realisations: Img[] = [
   { src: photos.terrassePiscine, alt: "Terrasse bois autour d'une piscine" },
+  { src: photos.portailAcierVert, alt: "Portail battant acier vert" },
   { src: photos.pergolaBioclimatique, alt: "Pergola bioclimatique aluminium" },
+  { src: photos.portillonClotureAluminium, alt: "Portillon et clôture aluminium anthracite" },
   { src: photos.bardageClotureBois, alt: "Bardage et clôture bois" },
+  { src: photos.clotureBoisClaireVoie, alt: "Clôture bois à claire-voie" },
   { src: photos.terrassePergolaBois, alt: "Terrasse bois et pergola bois" },
   { src: photos.clotureAluminium, alt: "Clôture aluminium sur muret" },
-  { src: photos.parquetInterieur, alt: "Parquet dans une pièce de vie" },
 ]
