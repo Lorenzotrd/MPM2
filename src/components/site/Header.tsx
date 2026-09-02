@@ -25,7 +25,7 @@ export function Header() {
     <header className="sticky top-0 z-40 border-b bg-background/90 backdrop-blur">
       <Container className="flex h-20 items-center justify-between gap-4">
         <Link to="/" className="shrink-0" aria-label={`${company.name}, accueil`}>
-          <img src="/logo-mpm.png" alt={company.name} className="h-10 w-auto" />
+          <img src="/logo-mpm.png" alt={company.name} width={775} height={165} className="h-10 w-auto" />
         </Link>
 
         <nav className="hidden items-center gap-3.5 xl:flex 2xl:gap-5" aria-label="Navigation principale">
@@ -56,7 +56,7 @@ export function Header() {
           <SheetContent side="right" className="w-[85vw] sm:max-w-sm">
             <SheetTitle className="sr-only">Menu</SheetTitle>
             <div className="px-6 pt-6">
-              <img src="/logo-mpm.png" alt={company.name} className="h-10 w-auto" />
+              <img src="/logo-mpm.png" alt={company.name} width={775} height={165} className="h-10 w-auto" />
             </div>
             <nav className="flex flex-col px-6" aria-label="Menu mobile">
               {links.map((l) => (

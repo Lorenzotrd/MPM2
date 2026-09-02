@@ -5,6 +5,7 @@ import PrestationPage from "@/pages/PrestationPage"
 import Engagements from "@/pages/Engagements"
 import Contact from "@/pages/Contact"
 import Mentions from "@/pages/Mentions"
+import NotFound from "@/pages/NotFound"
 
 export default function App() {
   return (
@@ -16,6 +17,7 @@ export default function App() {
           <Route path="contact" element={<Contact />} />
           <Route path="mentions-legales" element={<Mentions />} />
           <Route path=":slug" element={<PrestationPage />} />
+          <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
     </BrowserRouter>

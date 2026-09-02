@@ -3,20 +3,40 @@ import { ArrowRightIcon, PhoneIcon } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
-import { company, engagements, prestations, realisations, values } from "@/data/site"
-import { Container, Eyebrow, Heading, Photo, Section } from "@/components/site/Section"
+import { communes, company, engagements, photos, prestations, realisations, values } from "@/data/site"
+import { Container, Eyebrow, Heading, Photo, Picture, Section } from "@/components/site/Section"
 import { PrestationIcon } from "@/components/site/Icons"
 import { CtaBand } from "@/components/site/CtaBand"
+import { Seo } from "@/components/site/Seo"
+
+const engagementText: Record<string, string> = {
+  "Expertise offerte": "L'expertise de votre extérieur est offerte",
+  "Devis sous 48 h": "pour recevoir votre devis après étude du projet",
+  "Chantier propre": "des chantiers laissés propres, finitions soignées",
+  "Bilan à 1 an": "après les travaux, nous revenons faire le point",
+}
+
+/* Vignette d'une prestation dans le bandeau : photo si elle existe, sinon fond noir cohérent. */
+function StripBackground({ src, alt, sizes }: { src?: string; alt: string; sizes: string }) {
+  if (!src) return <div className="size-full bg-[linear-gradient(160deg,#1c1813,#0b0b0b)]" aria-hidden="true" />
+  return <Picture src={src} alt={alt} sizes={sizes} className="size-full object-cover transition-transform duration-500 group-hover:scale-105" />
+}
 
 export default function Home() {
   return (
     <>
+      <Seo
+        title={`${company.short} ${company.name} : portails, clôtures, terrasses, pergolas dans les Landes`}
+        description={`Artisan à Saint-Vincent-de-Tyrosse : portails, clôtures, terrasses bois, pergolas, bardages et menuiseries sur mesure. Expertise gratuite, devis sous 48 h, suivi 1 an. ${communes.slice(1, 6).join(", ")}.`}
+        path="/"
+      />
+
       {/* Hero plein écran sur photo */}
-      <section className="relative flex min-h-[88vh] items-end overflow-hidden">
-        <img src="/photos/terrasse-piscine.jpg" alt="" className="absolute inset-0 size-full object-cover" fetchPriority="high" />
+      <section className="relative flex min-h-[70vh] items-end overflow-hidden sm:min-h-[88vh]">
+        <Picture src={photos.terrassePiscine} alt="" sizes="100vw" loading="eager" decoding="sync" fetchPriority="high" className="absolute inset-0 size-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-black/20" />
         <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/20 to-transparent" />
-        <Container className="relative pb-20 pt-32 sm:pb-28">
+        <Container className="relative pb-16 pt-28 sm:pb-28 sm:pt-32">
           <Eyebrow>{company.tagline}</Eyebrow>
           <h1 className="mt-6 max-w-3xl text-4xl leading-[1.05] font-normal tracking-tight sm:text-6xl lg:text-7xl">
             Votre extérieur, pensé avec vous, <span className="font-light text-gold">réalisé par nous</span>
@@ -45,7 +65,7 @@ export default function Home() {
               className="group relative flex-1 -mr-[5%] overflow-hidden last:mr-0"
               style={{ clipPath: i === prestations.length - 1 ? "none" : "polygon(0 0,100% 0,84% 100%,0 100%)" }}
             >
-              <img src={p.images[0]?.src} alt={p.images[0]?.alt} loading="lazy" className="size-full object-cover transition-transform duration-500 group-hover:scale-105" />
+              <StripBackground src={p.images[0]?.src} alt={p.images[0]?.alt ?? ""} sizes="20vw" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
               <div className="absolute inset-x-0 bottom-0 flex items-center gap-3 px-5 pb-5 pr-[16%]">
                 <PrestationIcon name={p.icon} className="size-6 shrink-0 text-gold" />
@@ -66,7 +86,7 @@ export default function Home() {
                     tabIndex={copy === 1 ? -1 : undefined}
                     className="group relative mr-2 aspect-square w-[68vw] max-w-[300px] shrink-0 overflow-hidden"
                   >
-                    <img src={p.images[0]?.src} alt={p.images[0]?.alt} loading="lazy" className="size-full object-cover" />
+                    <StripBackground src={p.images[0]?.src} alt={p.images[0]?.alt ?? ""} sizes="70vw" />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
                     <div className="absolute inset-x-0 bottom-0 flex items-center gap-3 px-5 pb-5">
                       <PrestationIcon name={p.icon} className="size-6 shrink-0 text-gold" />
@@ -96,7 +116,7 @@ export default function Home() {
             {engagements.map((e) => (
               <div key={e.title} className="bg-background p-7">
                 <div className="text-4xl font-light text-gold">{e.stat}</div>
-                <div className="mt-3 text-sm text-muted-foreground">{e.short === "Expertise offerte" ? "L'expertise de votre extérieur est offerte" : e.short === "Devis sous 48 h" ? "pour recevoir votre devis après étude du projet" : e.short === "Chantier propre" ? "des chantiers laissés propres, finitions soignées" : "après les travaux, nous revenons faire le point"}</div>
+                <div className="mt-3 text-sm text-muted-foreground">{engagementText[e.short] ?? e.short}</div>
               </div>
             ))}
           </div>
@@ -116,7 +136,7 @@ export default function Home() {
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {prestations.map((p) => (
               <Card key={p.slug} className="group bg-background">
-                <Photo src={p.images[0]?.src} alt={p.images[0]?.alt} className="aspect-[4/3]" />
+                <Photo src={p.images[0]?.src} alt={p.images[0]?.alt} sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw" className="aspect-[4/3]" />
                 <CardHeader>
                   <div className="flex items-center gap-3">
                     <PrestationIcon name={p.icon} className="size-6 text-gold" />
@@ -141,11 +161,11 @@ export default function Home() {
               <Eyebrow>Nos réalisations</Eyebrow>
               <Heading>Quelques chantiers récents</Heading>
             </div>
-            <Button asChild variant="link" className="px-0"><a href={company.instagram} target="_blank" rel="noopener">Plus de photos sur Instagram <ArrowRightIcon /></a></Button>
+            <p className="max-w-md text-sm text-muted-foreground">Terrasses, pergolas, clôtures et bardages posés dans le sud des Landes.</p>
           </div>
           <div className="mt-10 grid grid-cols-2 gap-2 md:grid-cols-4">
             {realisations.slice(0, 5).map((r, i) => (
-              <Photo key={r.src} src={r.src} alt={r.alt} className={i === 0 ? "col-span-2 row-span-2 aspect-square" : "aspect-square"} />
+              <Photo key={r.src} src={r.src} alt={r.alt} sizes={i === 0 ? "(min-width: 768px) 50vw, 100vw" : "(min-width: 768px) 25vw, 50vw"} className={i === 0 ? "col-span-2 row-span-2 aspect-square" : "aspect-square"} />
             ))}
           </div>
         </Container>
@@ -162,6 +182,19 @@ export default function Home() {
           <ul className="mt-8 flex flex-wrap justify-center gap-x-8 gap-y-2 text-[11px] font-medium uppercase tracking-[0.2em] text-muted-foreground">
             {values.map((v) => <li key={v}>{v}</li>)}
           </ul>
+        </Container>
+      </Section>
+
+      {/* Zone d'intervention */}
+      <Section className="border-t bg-card">
+        <Container className="grid gap-8 lg:grid-cols-[1fr_1.4fr] lg:items-center">
+          <div>
+            <Eyebrow>Zone d'intervention</Eyebrow>
+            <Heading>Sud des Landes et Pays basque</Heading>
+          </div>
+          <p className="text-muted-foreground">
+            Basés à {company.city}, nous intervenons à {communes.filter((c) => c !== company.city).join(", ")} et dans toutes les communes alentour. Le déplacement pour l'expertise de votre projet est offert.
+          </p>
         </Container>
       </Section>
 
