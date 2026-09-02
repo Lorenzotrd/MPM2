@@ -110,6 +110,9 @@ export const photos = {
   porteAluminiumAtelier: "porte-aluminium-atelier",
   fenetreAluminiumVoletRoulant: "fenetre-aluminium-volet-roulant",
   porteFenetreBoisBlanche: "porte-fenetre-bois-blanche",
+  porteServiceAluminium: "porte-service-aluminium",
+  porteEntreeAluminiumDesign: "porte-entree-aluminium-design",
+  parquetSejourRenovation: "parquet-sejour-renovation",
 }
 
 export const prestations: Prestation[] = [
@@ -214,8 +217,10 @@ export const prestations: Prestation[] = [
       { src: photos.dressingParquetChene, alt: "Dressing sur mesure à portes toute hauteur et parquet chêne" },
       { src: photos.porteFenetreBoisBlanche, alt: "Porte-fenêtre bois blanche à petits carreaux avec imposte, façade en pierre" },
       { src: photos.fenetreAluminiumVoletRoulant, alt: "Fenêtre aluminium anthracite avec volet roulant intégré" },
-      { src: photos.porteAluminiumAtelier, alt: "Porte d'entrée aluminium noire, vitrage style atelier" },
-      { src: photos.parquetInterieur, alt: "Pose de parquet dans une pièce de vie" },
+      { src: photos.porteEntreeAluminiumDesign, alt: "Porte d'entrée aluminium anthracite à inserts vitrés" },
+      { src: photos.porteServiceAluminium, alt: "Porte de service aluminium anthracite vitrée, volet roulant assorti" },
+      { src: photos.porteAluminiumAtelier, alt: "Porte aluminium noire, vitrage style atelier" },
+      { src: photos.parquetSejourRenovation, alt: "Parquet posé dans un séjour en rénovation" },
     ],
     faq: [
       { q: "Faites-vous uniquement de la pose ?", a: "Non. Nous concevons et fabriquons aussi les aménagements sur mesure (dressings, rangements, habillages en MDF ou stratifié)." },
